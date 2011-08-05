@@ -13,17 +13,25 @@
 
 import sys, re
 
-from yapps import runtime, parsetree
+import exyapps.runtime as runtime
+import exyapps.parsetree as parsetree
 
-def generate(inputfilename, outputfilename='', dump=0, **flags):
+def generate(inputfilename, outputfilename=None, dump=0, **flags):
     """Generate a grammar, given an input filename (X.g)
     and an output filename (defaulting to X.py)."""
 
     if not outputfilename:
+        # recognize *.g because that is what the old yapps used
         if inputfilename.endswith('.g'):
             outputfilename = inputfilename[:-2] + '.py'
+
+        # recognize *.exy for the new grammar
+        elif inputfilename.endswith('.exy'):
+            outputfilename = inputfilename[:-3] + '.py'
+
+        # cannot automatically generate the output file name if we don't recognize extension
         else:
-            raise Exception('Must specify output filename if input filename is not *.g')
+            raise Exception('Must specify output filename if input filename is not *.exy or *.g')
         
     DIVIDER = '\n%%\n' # This pattern separates the pre/post parsers
     preparser, postparser = None, None # Code before and after the parser desc
@@ -33,30 +41,39 @@ def generate(inputfilename, outputfilename='', dump=0, **flags):
 
     # See if there's a separation between the pre-parser and parser
     f = s.find(DIVIDER)
-    if f >= 0: preparser, s = s[:f]+'\n\n', s[f+len(DIVIDER):]
+    if f >= 0: 
+        preparser, s = s[:f]+'\n\n', s[f+len(DIVIDER):]
 
     # See if there's a separation between the parser and post-parser
     f = s.find(DIVIDER)
-    if f >= 0: s, postparser = s[:f], '\n\n'+s[f+len(DIVIDER):]
+    if f >= 0: 
+        s, postparser = s[:f], '\n\n'+s[f+len(DIVIDER):]
 
     # Create the parser and scanner and parse the text
     scanner = grammar.ParserDescriptionScanner(s, filename=inputfilename)
-    if preparser: scanner.del_line += preparser.count('\n')
+    if preparser:   
+        scanner.del_line += preparser.count('\n')
 
     parser = grammar.ParserDescription(scanner)
     t = runtime.wrap_error_reporter(parser, 'Parser')
-    if t is None: return 1 # Failure
-    if preparser is not None: t.preparser = preparser
-    if postparser is not None: t.postparser = postparser
+    if t is None: 
+        return 1 # Failure
+    if preparser is not None: 
+        t.preparser = preparser
+    if postparser is not None: 
+        t.postparser = postparser
 
     # Check the options
     for f in t.options.keys():
         for opt,_,_ in yapps_options:
-            if f == opt: break
+            if f == opt: 
+                break
         else:
             print >>sys.stderr, 'Warning: unrecognized option', f
+
     # Add command line options to the set
-    for f in flags.keys(): t.options[f] = flags[f]
+    for f in flags.keys(): 
+        t.options[f] = flags[f]
             
     # Generate the output
     if dump:
@@ -66,7 +83,7 @@ def generate(inputfilename, outputfilename='', dump=0, **flags):
         t.generate_output()
     return 0
 
-if __name__ == '__main__':
+def main() :
     import doctest
     doctest.testmod(sys.modules['__main__'])
     doctest.testmod(parsetree)
@@ -88,6 +105,7 @@ if __name__ == '__main__':
         print >>sys.stderr, ('  --use-devel-grammar' + ' '*40)[:35] + 'Use the devel grammar parser from yapps_grammar.py instead of the stable grammar from grammar.py'
         for flag, _, doc in yapps_options:
             print >>sys.stderr, ('  -f' + flag + ' '*40)[:35] + doc
+        return 1
     else:
         # Read in the options and create a list of flags
         flags = {}
@@ -106,8 +124,12 @@ if __name__ == '__main__':
                     print >>sys.stderr, 'Warning: unrecognized option', opt[0], opt[1]
 
         if use_devel_grammar:
-            import yapps_grammar as grammar
+            import yapps_grammar as g2
         else:
-            from yapps import grammar
+            import exyapps.grammar as g2
+
+        global grammar
+        grammar = g2
             
-        sys.exit(generate(*tuple(args), **flags))
+        return generate(*tuple(args), **flags)
+

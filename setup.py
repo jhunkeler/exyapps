@@ -1,10 +1,10 @@
 #!/usr/bin/env python
 
-"""Setup script for 'yapps'"""
+"""Setup script for 'exyapps'"""
 
 from distutils.core import setup
 
-description = "Yet Another Python Parser System"
+description = "Extensions of Yet Another Python Parser System"
 long_description = \
 """
 YAPPS is an easy to use parser generator that is written in Python and
@@ -23,20 +23,27 @@ original YAPPS source:
 - augmented ignore-able patterns (can parse multi-line C comments correctly)
 - better error reporting
 - read input incrementally
+
+Exyapps is an extended fork of yapps with these new features:
+-  (to be written)
+
 """
 
-setup (name = "python-yapps",
-       version = "2.1.1",
-       description = description,
-       long_description = long_description,
-       author = "Amit J. Patel",
-       author_email = "amitp@cs.stanford.edu",
-       maintainer = "Matthias Urlichs",
-       maintainer_email = "smurf@debian.org",
-       url = "http://theory.stanford.edu/~amitp/yapps/",
-       license = 'MIT',
-       platforms = ['POSIX'],
-       keywords = ['parsing'],
-       packages = ['yapps'],
-       #cmdclass = {'bdist_rpm': MyBDist_RPM},
-      )
+setup (
+	name = "exyapps",
+	version = "3.0",
+	description = description,
+	long_description = long_description,
+	# bug: replace this and put acknowledgements of these guys in the docs
+	# url = "http://theory.stanford.edu/~amitp/yapps/",
+	# author = "Amit J. Patel",
+	# author_email = "amitp@cs.stanford.edu",
+	# maintainer = "Matthias Urlichs",
+	# maintainer_email = "smurf@debian.org",
+	license = 'MIT',
+	platforms = ['POSIX'],
+	keywords = ['parsing'],
+	packages = ['exyapps'],
+    scripts = ['scripts/exyapps'],
+	#cmdclass = {'bdist_rpm': MyBDist_RPM},
+	)

@@ -1,0 +1,50 @@
+This is exyapps, a LL(1) parser generator.  
+
+It is derived from yapps ( http://theory.stanford.edu/~amitp/yapps/
+) by Amit J. Patel <amitp@cs.stanford.edu>.  He is no longer
+maintaining it, and there seem to be several forks out there, all
+with varying version numbers.  This copy was derived from some
+patches included with Debian by Matthias Urlichs <smurf@debian.org>
+
+Since I want to make some of my own specific changes, I'm actually changing 
+the name so this package can have a distinctive identity.  
+
+
+Installing / using exyapps
+--
+
+	python setup.py install
+
+	cd /your/project
+
+	exyapps my_grammar.exy
+
+For now, the package is compatible with yapps; Someday, I want to
+make parsers run without the exyapps package installed.
+
+What is here?
+--
+
+Makefile
+yapps_grammar.g
+	yapps_grammar.g is the source code for exyapps/grammar.py
+	type "make" to re-generate it, then do an svn commit
+
+doc
+	looks like latex source for the documentation
+
+examples
+	duh
+
+exyapps
+	the exyapps package that gets installed
+
+scripts
+	"exyapps" command that compiles a parser into python code.
+
+setup.py
+
+test
+	not actual tests, but apparently some interesting input to
+	run through the parser for testing
+

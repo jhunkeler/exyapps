@@ -1,0 +1,4 @@
+#!python
+
+import exyapps.main
+exyapps.main.main()

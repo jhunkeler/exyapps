@@ -18,7 +18,7 @@ by running Yapps on yapps_grammar.g.  (Holy circularity, Batman!)
 """
 
 import sys, re
-from yapps import parsetree
+from exyapps import parsetree
 
 ######################################################################
 def cleanup_choice(rule, lst):
