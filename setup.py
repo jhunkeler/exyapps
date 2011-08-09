@@ -30,20 +30,20 @@ Exyapps is an extended fork of yapps with these new features:
 """
 
 setup (
-	name = "exyapps",
-	version = "3.0",
-	description = description,
-	long_description = long_description,
-	# bug: replace this and put acknowledgements of these guys in the docs
-	# url = "http://theory.stanford.edu/~amitp/yapps/",
-	# author = "Amit J. Patel",
-	# author_email = "amitp@cs.stanford.edu",
-	# maintainer = "Matthias Urlichs",
-	# maintainer_email = "smurf@debian.org",
-	license = 'MIT',
-	platforms = ['POSIX'],
-	keywords = ['parsing'],
-	packages = ['exyapps'],
+    name = "exyapps",
+    version = "3.0",
+    description = description,
+    long_description = long_description,
+    # bug: replace this and put acknowledgements of these guys in the docs
+    # url = "http://theory.stanford.edu/~amitp/yapps/",
+    # author = "Amit J. Patel",
+    # author_email = "amitp@cs.stanford.edu",
+    # maintainer = "Matthias Urlichs",
+    # maintainer_email = "smurf@debian.org",
+    license = 'MIT',
+    platforms = ['POSIX'],
+    keywords = ['parsing'],
+    packages = ['exyapps'],
     scripts = ['scripts/exyapps'],
-	#cmdclass = {'bdist_rpm': MyBDist_RPM},
-	)
+    #cmdclass = {'bdist_rpm': MyBDist_RPM},
+    )

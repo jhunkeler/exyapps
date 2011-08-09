@@ -13,11 +13,11 @@ the name so this package can have a distinctive identity.
 Installing / using exyapps
 --
 
-	python setup.py install
+        python setup.py install
 
-	cd /your/project
+        cd /your/project
 
-	exyapps my_grammar.exy
+        exyapps my_grammar.exy
 
 For now, the package is compatible with yapps; Someday, I want to
 make parsers run without the exyapps package installed.
@@ -34,26 +34,26 @@ What is here?
 
 Makefile
 yapps_grammar.g
-	yapps_grammar.g is the source code for exyapps/grammar.py
-	type "make" to re-generate it, then do an svn commit
+        yapps_grammar.g is the source code for exyapps/grammar.py
+        type "make" to re-generate it, then do an svn commit
 
 doc
-	looks like latex source for the documentation
+        looks like latex source for the documentation
 
 examples
-	duh
+        duh
 
 exyapps
-	the exyapps package that gets installed
+        the exyapps package that gets installed
 
 scripts
-	"exyapps" command that compiles a parser into python code.
+        "exyapps" command that compiles a parser into python code.
 
 setup.py
 
 test
-	not actual tests, but apparently some interesting input to
-	run through the parser for testing
+        not actual tests, but apparently some interesting input to
+        run through the parser for testing
 
 
 New Features
