@@ -65,7 +65,7 @@ class Token(object):
 
 in_name=0
 class Scanner(object):
-	"""Yapps scanner.
+	"""Yapps scanner.  (lexical analyzer)
 
 	The Yapps scanner can work in context sensitive or context
 	insensitive modes.  The token(i) method is used to retrieve the
@@ -357,8 +357,9 @@ class Parser(object):
 
 	"""
 	
-	def __init__(self, scanner):
+	def __init__(self, scanner, data=None):
 		self._scanner = scanner
+		self.data = data
 		
 	def _stack(self, input="",file=None,filename=None):
 		"""Temporarily read from someplace else"""

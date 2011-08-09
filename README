@@ -1,10 +1,10 @@
 This is exyapps, a LL(1) parser generator.  
 
-It is derived from yapps ( http://theory.stanford.edu/~amitp/yapps/
-) by Amit J. Patel <amitp@cs.stanford.edu>.  He is no longer
-maintaining it, and there seem to be several forks out there, all
-with varying version numbers.  This copy was derived from some
-patches included with Debian by Matthias Urlichs <smurf@debian.org>
+It is derived from yapps ( http://theory.stanford.edu/~amitp/yapps/ )
+by Amit J. Patel <amitp@cs.stanford.edu>.  He is no longer maintaining
+it, and there seem to be several forks out there, all with varying
+version numbers.  This copy was derived from some patches included
+with Debian by Matthias Urlichs <smurf@debian.org>
 
 Since I want to make some of my own specific changes, I'm actually changing 
 the name so this package can have a distinctive identity.  
@@ -21,6 +21,13 @@ Installing / using exyapps
 
 For now, the package is compatible with yapps; Someday, I want to
 make parsers run without the exyapps package installed.
+
+VIM
+--
+
+Put this in .vimrc
+
+autocmd BufRead,BufNewFile *.exy                set filetype=python
 
 What is here?
 --
@@ -47,4 +54,14 @@ setup.py
 test
 	not actual tests, but apparently some interesting input to
 	run through the parser for testing
+
+
+New Features
+--
+
+- You can pass a data object to the parser for it to use as
+parser-global data.  I know the OO way is to subclass the parser
+object and hope you don't accidentally override/smash anything
+important, but this is easier to use in a particular application
+I have in mind.
 
