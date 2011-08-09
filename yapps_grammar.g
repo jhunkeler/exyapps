@@ -32,9 +32,9 @@ def cleanup_sequence(rule, lst):
 
 def resolve_name(rule, tokens, id, args):
     if id in [x[0] for x in tokens]:
-	# It's a token
-	if args:
-	    print 'Warning: ignoring parameters on TOKEN %s<<%s>>' % (id, args)
+        # It's a token
+        if args:
+            print 'Warning: ignoring parameters on TOKEN %s<<%s>>' % (id, args)
         return parsetree.Terminal(rule, id)
     else:
         # It's a name, so assume it's a nonterminal
@@ -75,9 +75,9 @@ parser ParserDescription:
                   (
                     "token" ID ":" Str {{ tok.append( (ID,Str) ) }}
                   | "ignore"  
-				    ":" Str {{ ign = ('#ignore',Str) }}
-				    ( STMT  {{ ign = ign + (STMT[2:-2],) }} )?
-				            {{ tok.append( ign ) }}
+                                    ":" Str {{ ign = ('#ignore',Str) }}
+                                    ( STMT  {{ ign = ign + (STMT[2:-2],) }} )?
+                                            {{ tok.append( ign ) }}
                   )*
                   {{ return tok }}
 
