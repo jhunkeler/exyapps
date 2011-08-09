@@ -27,7 +27,7 @@ def generate(inputfilename, outputfilename=None, dump=0, **flags):
 
         # recognize *.exy for the new grammar
         elif inputfilename.endswith('.exy'):
-            outputfilename = inputfilename[:-3] + '.py'
+            outputfilename = inputfilename[:-4] + '.py'
 
         # cannot automatically generate the output file name if we don't recognize extension
         else:
