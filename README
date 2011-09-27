@@ -3,11 +3,20 @@ This is exyapps, a LL(1) parser generator.
 It is derived from yapps ( http://theory.stanford.edu/~amitp/yapps/ )
 by Amit J. Patel <amitp@cs.stanford.edu>.  He is no longer maintaining
 it, and there seem to be several forks out there, all with varying
-version numbers.  This copy was derived from some patches included
-with Debian by Matthias Urlichs <smurf@debian.org>
+version numbers.  Matthias Urlichs <smurf@debian.org> made some patches
+for Debian; this copy was derived from the Debian distribution by Mark
+Sienkiewicz at the Space Telescope Science Institute.  (For email,
+use the first 8 letters of my last name and @stsci.edu)
 
-Since I want to make some of my own specific changes, I'm actually changing 
-the name so this package can have a distinctive identity.  
+Some of the modifications that changed yapps to exyapps introduced the
+possibility of a fundmamental incompatibility with existing yapps2-based
+parsers.  This, coupled with the non-linear version numbers of the
+various forks, prompted me to rename yapps to exyapps.
+
+(STScI is a subsidiary of the Association of Universities for Research
+in Astronomy, which is why the copyright to the new code in exyapps
+belongs to AURA.)
+
 
 
 Installing / using exyapps
@@ -19,15 +28,28 @@ Installing / using exyapps
 
         exyapps my_grammar.exy
 
-For now, the package is compatible with yapps; Someday, I want to
-make parsers run without the exyapps package installed.
+Modifying exyapps
+--
+
+The exyapps parser is written in exyapps.  If you want to modify
+yapps_grammar.g, use this procedure:
+
+	- install the current version of exyapps
+
+	- rm exyapps/grammar.py
+
+	- make
+
+This will re-generate grammar.py, which will be your new parser.  You can
+install it somewhere else to try it.
+
 
 VIM
 --
 
 Put this in .vimrc
 
-autocmd BufRead,BufNewFile *.exy                set filetype=python
+	autocmd BufRead,BufNewFile *.exy                set filetype=python
 
 What is here?
 --
@@ -35,21 +57,22 @@ What is here?
 Makefile
 yapps_grammar.g
         yapps_grammar.g is the source code for exyapps/grammar.py
-        type "make" to re-generate it, then do an svn commit
 
 doc
-        looks like latex source for the documentation
+        latex source for the documentation
 
 examples
-        duh
 
 exyapps
-        the exyapps package that gets installed
+        the exyapps package that gets installed - as of exyapps 3.0,
+        this is only need to compile the parser; you do not need to
+        install exyapps to run a generated parser.
 
 scripts
         "exyapps" command that compiles a parser into python code.
 
 setup.py
+	regular setup.py using distutils
 
 test
         not actual tests, but apparently some interesting input to
@@ -58,6 +81,9 @@ test
 
 New Features
 --
+
+- The generated parser no longer needs to have exyapps installed at
+run time.  The entire runtime is incorporated into the parser.  
 
 - You can pass a data object to the parser for it to use as
 parser-global data.  I know the OO way is to subclass the parser

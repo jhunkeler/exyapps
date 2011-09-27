@@ -1,15 +1,13 @@
 #!/usr/bin/python
 
 #
-# Yapps 2 - yet another python parser system
+# exyapps - yet another python parser system
 # Copyright 1999-2003 by Amit J. Patel <amitp@cs.stanford.edu>
+# Copyright 2011 by Association of Universities for Research in Astronomy
 #
-# This version of Yapps 2 can be distributed under the
-# terms of the MIT open source license, either found in the LICENSE file
-# included with the Yapps distribution
-# <http://theory.stanford.edu/~amitp/yapps/> or at
+# This software can be distributed under the terms of the MIT
+# open source license, either found in the LICENSE file or at
 # <http://www.opensource.org/licenses/mit-license.php>
-#
 
 import sys, re
 

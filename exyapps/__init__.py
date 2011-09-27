@@ -1,1 +1,1 @@
-# empty
+__version__ = '3.0dev'

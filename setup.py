@@ -7,33 +7,32 @@ from distutils.core import setup
 description = "Extensions of Yet Another Python Parser System"
 long_description = \
 """
-YAPPS is an easy to use parser generator that is written in Python and
-generates Python code.  There are several parser generator systems
-already available for Python, but this parser has different goals:
-Yapps is simple, very easy to use, and produces human-readable parsers.
+EXYAPPS is an easy to use parser generator that is written in Python and
+generates Python code.  It is intended to be simple, very easy to use,
+and produce human-readable parsers.
 
-It is not the fastest or most powerful parser.  Yapps is designed to be
-used when regular expressions are not enough and other parser systems
-are too much: situations where you might otherwise write your own
-recursive descent parser.
+It is not the fastest or most powerful parser.  Exyapps is designed
+to be used when regular expressions are not enough and other parser
+systems are too much: situations where you might otherwise write your
+own recursive descent parser.
 
-This package contains several upward-compatible enhancements to the
-original YAPPS source:
+Exyapps is derived from YAPPS, with various extensions:
 - Handle stacked input ("include files")
 - augmented ignore-able patterns (can parse multi-line C comments correctly)
 - better error reporting
 - read input incrementally
-
-Exyapps is an extended fork of yapps with these new features:
--  (to be written)
+- the generated parser does not require any runtime library
 
 """
 
 setup (
     name = "exyapps",
-    version = "3.0",
+    version = "3.0dev",
     description = description,
     long_description = long_description,
+    url="https://svn.stsci.edu/trac/ssb/etal/wiki/exyapps",
+    maintainer="Mark Sienkiewicz",
+    maintainer_email='no_spam@see_url',
     # bug: replace this and put acknowledgements of these guys in the docs
     # url = "http://theory.stanford.edu/~amitp/yapps/",
     # author = "Amit J. Patel",
@@ -45,5 +44,6 @@ setup (
     keywords = ['parsing'],
     packages = ['exyapps'],
     scripts = ['scripts/exyapps'],
-    #cmdclass = {'bdist_rpm': MyBDist_RPM},
+    # if we ever start using distribute
+    # zip_safe = False,
     )

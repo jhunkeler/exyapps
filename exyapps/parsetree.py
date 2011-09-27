@@ -1,12 +1,16 @@
-# parsetree.py, part of Yapps 2 - yet another python parser system
+# parsetree.py, part of exyapps
 # Copyright 1999-2003 by Amit J. Patel <amitp@cs.stanford.edu>
+# Copyright 2011 by Association of Universities for Research in Astronomy
 #
-# This version of the Yapps 2 Runtime can be distributed under the
-# terms of the MIT open source license, either found in the LICENSE file
-# included with the Yapps distribution
-# <http://theory.stanford.edu/~amitp/yapps/> or at
+# This software can be distributed under the terms of the MIT
+# open source license, either found in the LICENSE file or at
 # <http://www.opensource.org/licenses/mit-license.php>
 #
+# -----
+#
+# Except for changes necessary to incorporate the runtime library directly
+# into the generated parser, this file is not substantially changed from
+# YAPPS 2.
 
 """Classes used to represent parse trees and generate output.
 
@@ -15,14 +19,16 @@ of Python output from a grammar parse tree.  It also defines nodes
 used to represent the parse tree; they are derived from class Node.
 
 The main logic of Yapps is in this module.
+
+This module is used only to compile a parser.
 """
 
 import sys, re
 
 import os.path
 
-# load the contents of the runtime file into memory; it will be
-# incorporated into the parser later.
+# Load the contents of the runtime file into memory.  We always need
+# this.  It will be incorporated into the generated parser code later.
 runtime_py_filename = os.path.dirname(__file__)+"/runtime.py"
 f = open( runtime_py_filename ,"r")
 runtime_contents = f.read()
@@ -42,7 +48,6 @@ class Generator:
         self.options = options
         self.preparser = ''
         self.postparser = None
-        self.inline_runtime = 1
         
         self.tokens = {} # Map from tokens to regexps
         self.ignore = {} # List of token names to ignore in parsing, map to statements
@@ -286,12 +291,9 @@ class Generator:
         self.write("import sys, re\n")
 
         # 
-        if self.inline_runtime :
-            self.write("###### included from %s\n"%runtime_py_filename)
-            self.write(runtime_contents)
-            self.write("###### end of runtime.py\n")
-        else :
-            self.write("from exyapps.runtime import SyntaxError, NoMoreTokens, Token, Scanner, Parser, Context, print_error, wrap_error_reporter\n")
+        self.write("###### included from %s\n"%runtime_py_filename)
+        self.write(runtime_contents)
+        self.write("###### end of runtime.py\n")
 
         self.write("\n")
 
