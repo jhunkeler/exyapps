@@ -1,9 +1,2 @@
-recursive-include examples *.g
-recursive-include exyapps *
-recursive-include scripts *
-recursive-include test *
-recursive-include doc *
-include LICENSE Makefile README setup.py  yapps_grammar.g
-include examples/notes
-
-# drwxrwsr-x 3 sienkiew ssb 4096 Aug 31 15:05 doc
+include *
+recursive-include * *
