@@ -1,0 +1,12 @@
+Makefile
+build
+make.bat
+source
+	New documentation written in RST for Sphinx to process
+	TRANSLATION FROM LATEX INCOMPLETE
+
+yapps2.haux
+yapps2.html
+yapps2.htoc
+yapps2.tex
+	Original latex documentation

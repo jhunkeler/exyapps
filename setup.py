@@ -5,6 +5,7 @@
 from distutils.core import setup
 
 description = "Extensions of Yet Another Python Parser System"
+
 long_description = \
 """
 EXYAPPS is an easy to use parser generator that is written in Python and
@@ -27,7 +28,7 @@ Exyapps is derived from YAPPS, with various extensions:
 
 setup (
     name = "exyapps",
-    version = "3.0dev",
+    version = "3.0",
     description = description,
     long_description = long_description,
     url="https://svn.stsci.edu/trac/ssb/etal/wiki/exyapps",
@@ -35,10 +36,7 @@ setup (
     maintainer_email='no_spam@see_url',
     # bug: replace this and put acknowledgements of these guys in the docs
     # url = "http://theory.stanford.edu/~amitp/yapps/",
-    # author = "Amit J. Patel",
-    # author_email = "amitp@cs.stanford.edu",
-    # maintainer = "Matthias Urlichs",
-    # maintainer_email = "smurf@debian.org",
+    # author = "Amit J. Patel, Matthias Urlichs, Mark Sienkiewicz",
     license = 'MIT',
     platforms = ['POSIX'],
     keywords = ['parsing'],

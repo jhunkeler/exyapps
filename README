@@ -1,22 +1,29 @@
 This is exyapps, a LL(1) parser generator.  
 
-It is derived from yapps ( http://theory.stanford.edu/~amitp/yapps/ )
-by Amit J. Patel <amitp@cs.stanford.edu>.  He is no longer maintaining
-it, and there seem to be several forks out there, all with varying
-version numbers.  Matthias Urlichs <smurf@debian.org> made some patches
-for Debian; this copy was derived from the Debian distribution by Mark
-Sienkiewicz at the Space Telescope Science Institute.  (For email,
-use the first 8 letters of my last name and @stsci.edu)
+It is derived from yapps ( http://theory.stanford.edu/~amitp/yapps/
+) by Amit J. Patel <amitp .at. cs.stanford.edu>.  He is no longer
+maintaining yapps, and there seem to be several forks out there,
+all with varying version numbers.  Matthias Urlichs <smurf .at.
+debian.org> made some patches for Debian; this copy was derived
+from the Debian distribution, by Mark Sienkiewicz <sienkiew .at.
+stsci.edu> at the Space Telescope Science Institute.
 
 Some of the modifications that changed yapps to exyapps introduced the
 possibility of a fundmamental incompatibility with existing yapps2-based
 parsers.  This, coupled with the non-linear version numbers of the
 various forks, prompted me to rename yapps to exyapps.
 
-(STScI is a subsidiary of the Association of Universities for Research
-in Astronomy, which is why the copyright to the new code in exyapps
-belongs to AURA.)
 
+New Features of exyapps relative to yapps
+--
+
+- The generated parser no longer needs to have exyapps installed at
+run time.  The entire runtime is incorporated into the parser.  
+
+- You can pass a data object to the parser for it to use as
+parser-global data.  I know the OO way is to subclass the parser
+object and hope you don't accidentally override anything important,
+but I find easier to use in a particular application I have in mind.
 
 
 Installing / using exyapps
@@ -27,6 +34,9 @@ Installing / using exyapps
         cd /your/project
 
         exyapps my_grammar.exy
+
+	it will create a file named my_grammar.py
+
 
 Modifying exyapps
 --
@@ -47,9 +57,12 @@ install it somewhere else to try it.
 VIM
 --
 
-Put this in .vimrc
+To recognize .exy files and treat them as python, put this in .vimrc
 
 	autocmd BufRead,BufNewFile *.exy                set filetype=python
+
+This is not exactly an ideal configuration, but it is good enough.
+
 
 What is here?
 --
@@ -59,14 +72,16 @@ yapps_grammar.g
         yapps_grammar.g is the source code for exyapps/grammar.py
 
 doc
-        latex source for the documentation
+        latex source for the documentation - this is the original
+	document by Amit Patel; it has not been updated to reflect
+	the exyapps modifications.
 
 examples
 
 exyapps
-        the exyapps package that gets installed - as of exyapps 3.0,
-        this is only need to compile the parser; you do not need to
-        install exyapps to run a generated parser.
+	the exyapps package that gets installed - this is only need
+	to compile the parser; you do not need to install exyapps
+	to run a generated parser.
 
 scripts
         "exyapps" command that compiles a parser into python code.
@@ -77,17 +92,4 @@ setup.py
 test
         not actual tests, but apparently some interesting input to
         run through the parser for testing
-
-
-New Features
---
-
-- The generated parser no longer needs to have exyapps installed at
-run time.  The entire runtime is incorporated into the parser.  
-
-- You can pass a data object to the parser for it to use as
-parser-global data.  I know the OO way is to subclass the parser
-object and hope you don't accidentally override/smash anything
-important, but this is easier to use in a particular application
-I have in mind.
 
