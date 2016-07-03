@@ -63,7 +63,7 @@ class Generator:
                 n = t
                 self.ignore[n] = s
             if n in self.tokens.keys() and self.tokens[n] != t:
-                print >>sys.stderr, 'Warning: token %s defined more than once.' % n
+                print('Warning: token %s defined more than once.' % n, file=sys.stderr)
             self.tokens[n] = t
             self.terminals.append(n)
             
@@ -259,20 +259,20 @@ class Generator:
         """Display the grammar in somewhat human-readable form."""
         self.calculate()
         for r in self.goals:
-            print '    _____' + '_'*len(r)
-            print ('___/Rule '+r+'\\' + '_'*80)[:79]
+            print('    _____' + '_'*len(r))
+            print(('___/Rule '+r+'\\' + '_'*80)[:79])
             queue = [self.rules[r]]
             while queue:
                 top = queue[0]
                 del queue[0]
 
-                print 'Rule', repr(top), 'of class', top.__class__.__name__
+                print('Rule', repr(top), 'of class', top.__class__.__name__)
                 top.first.sort()
                 top.follow.sort()
                 eps = []
                 if top.accepts_epsilon: eps = ['(null)']
-                print '     FIRST:', ', '.join(top.first+eps)
-                print '    FOLLOW:', ', '.join(top.follow)
+                print('     FIRST:', ', '.join(top.first+eps))
+                print('    FOLLOW:', ', '.join(top.follow))
                 for x in top.get_children(): queue.append(x)
                 
     def repr_ignore(self):
@@ -428,7 +428,7 @@ class NonTerminal(Node):
                 self.accepts_epsilon = self.target.accepts_epsilon
                 gen.changed()
         except KeyError: # Oops, it's nonexistent
-            print >>sys.stderr, 'Error: no rule <%s>' % self.name
+            print('Error: no rule <%s>' % self.name, file=sys.stderr)
             self.target = self
             
     def __str__(self):
@@ -556,12 +556,12 @@ class Choice(Node):
             tokens_seen = tokens_seen + testset
             if removed:
                 if not testset:
-                    print >>sys.stderr, 'Error in rule', self.rule+':'
+                    print('Error in rule', self.rule+':', file=sys.stderr)
                 else:
-                    print >>sys.stderr, 'Warning in rule', self.rule+':'
-                print >>sys.stderr, ' *', self
-                print >>sys.stderr, ' * These tokens could be matched by more than one clause:'
-                print >>sys.stderr, ' *', ' '.join(removed)
+                    print('Warning in rule', self.rule+':', file=sys.stderr)
+                print(' *', self, file=sys.stderr)
+                print(' * These tokens could be matched by more than one clause:', file=sys.stderr)
+                print(' *', ' '.join(removed), file=sys.stderr)
                 
             if testset:
                 if not tokens_unseen: # context sensitive scanners only!
@@ -620,7 +620,7 @@ class Option(Wrapper):
 
     def output(self, gen, indent):
         if self.child.accepts_epsilon:
-            print >>sys.stderr, 'Warning in rule', self.rule+': contents may be empty.'
+            print('Warning in rule', self.rule+': contents may be empty.', file=sys.stderr)
         gen.write(indent, "if %s:\n" %
                   gen.peek_test(self.first, self.child.first))
         self.child.output(gen, indent+INDENT)
@@ -649,8 +649,8 @@ class Plus(Wrapper):
         
     def output(self, gen, indent):
         if self.child.accepts_epsilon:
-            print >>sys.stderr, 'Warning in rule', self.rule+':'
-            print >>sys.stderr, ' * The repeated pattern could be empty.  The resulting parser may not work properly.'
+            print('Warning in rule', self.rule+':', file=sys.stderr)
+            print(' * The repeated pattern could be empty.  The resulting parser may not work properly.', file=sys.stderr)
         gen.write(indent, "while 1:\n")
         self.child.output(gen, indent+INDENT)
         union = self.first[:]
@@ -682,8 +682,8 @@ class Star(Wrapper):
         
     def output(self, gen, indent):
         if self.child.accepts_epsilon:
-            print >>sys.stderr, 'Warning in rule', self.rule+':'
-            print >>sys.stderr, ' * The repeated pattern could be empty.  The resulting parser probably will not work properly.'
+            print('Warning in rule', self.rule+':', file=sys.stderr)
+            print(' * The repeated pattern could be empty.  The resulting parser probably will not work properly.', file=sys.stderr)
         gen.write(indent, "while %s:\n" %
                   gen.peek_test(self.follow, self.child.first))
         self.child.output(gen, indent+INDENT)
